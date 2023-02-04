@@ -5,11 +5,13 @@ import pandas as pd
 
 
 BACKGROUND_COLOR = "#B1DDC6"
+# counter to see if its the first time calling the function
+counter = 0
 
 # ------------------------------ create word list and generate random word -----------------------------------==#
 word_df = pd.read_csv("data/french_words.csv")
 word_dict = word_df.to_dict(orient="records")
-
+print(word_dict)
 
 def generate_random_word():
     global word_dict
@@ -26,7 +28,8 @@ def button_flip_card():
 
 
 def x_button_click():
-    global flip_timer
+    global flip_timer, counter
+    counter += 1
     window.after_cancel(flip_timer)
     french_word, english_word = generate_random_word()
     flashcard.front_of_card(french_word=french_word, english_word=english_word)
@@ -34,11 +37,16 @@ def x_button_click():
 
 
 def checkmark_button_click():
-    global flip_timer
+    global flip_timer, counter
+    counter += 1
     window.after_cancel(flip_timer)
     french_word, english_word = generate_random_word()
     flashcard.front_of_card(french_word=french_word, english_word=english_word)
     flip_timer = window.after(3000, func=button_flip_card)
+    if counter > 1:
+        with open("learnt_words.txt", "a") as file:
+            file.write(f"{french_word} | {english_word}\n")
+        #del word_dict.remove(current_card)
 
 
 # --------------------------- UI Setup --------------------------------------------------------------#
