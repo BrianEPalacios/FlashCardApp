@@ -16,7 +16,7 @@ class Flashcard:
         # creating background of card
         self.canvas.create_image(400, 263, image=self.front_of_card_img)
         self.canvas.create_text(400, 150, text="Hello", font=("Ariel", 40, "italic"))
-        self.canvas.create_text(400, 263, text=f"press any button to begin", font=("Ariel", 60, "bold"))
+        self.canvas.create_text(400, 263, text=f"press any button", font=("Ariel", 60, "bold"))
         self.canvas.config(bg=BACKGROUND_COLOR, highlightthickness=0)
         self.canvas.grid(row=0, column=0, columnspan=2)
 
@@ -34,7 +34,7 @@ class Flashcard:
 
     def back_of_card(self):
         self.canvas.create_image(400, 263, image=self.back_of_card_img)
-        self.canvas.create_text(400, 150, text="English", font=("Ariel", 40, "italic"))
-        self.canvas.create_text(400, 263, text=f"{self.english_word}", font=("Ariel", 60, "bold"))
+        self.canvas.create_text(400, 150, text="English", font=("Ariel", 40, "italic"), fill="white")
+        self.canvas.create_text(400, 263, text=f"{self.english_word}", font=("Ariel", 60, "bold"), fill="white")
         # self.canvas.config(bg=BACKGROUND_COLOR, highlightthickness=0)
         # self.canvas.grid(row=0, column=0, columnspan=2)

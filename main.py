@@ -3,7 +3,6 @@ from flashcard import Flashcard
 import random
 import pandas as pd
 
-timer = None
 
 BACKGROUND_COLOR = "#B1DDC6"
 
@@ -21,22 +20,25 @@ def generate_random_word():
 
 
 # ---------------------------------- Button Functionality --------------------------------------------#
+# work around function for flipping the card: tkinter needs a function, was having problems calling the flashcard.back...
 def button_flip_card():
     flashcard.back_of_card()
 
 
 def x_button_click():
-    global timer
+    global flip_timer
+    window.after_cancel(flip_timer)
     french_word, english_word = generate_random_word()
     flashcard.front_of_card(french_word=french_word, english_word=english_word)
-    timer = window.after(3000, func=button_flip_card)
+    flip_timer = window.after(3000, func=button_flip_card)
 
 
 def checkmark_button_click():
-    global timer
+    global flip_timer
+    window.after_cancel(flip_timer)
     french_word, english_word = generate_random_word()
     flashcard.front_of_card(french_word=french_word, english_word=english_word)
-    timer = window.after(3000, func=button_flip_card)
+    flip_timer = window.after(3000, func=button_flip_card)
 
 
 # --------------------------- UI Setup --------------------------------------------------------------#
@@ -45,7 +47,7 @@ window.title("Flashcard")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 
 flashcard = Flashcard()
-
+flip_timer = window.after(3000, func=button_flip_card)
 
 # create buttons
 x_image = tk.PhotoImage(file="images/wrong.png")
