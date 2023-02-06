@@ -5,6 +5,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# files to not save
+words_to_learn.csv
+learnt_words.txt
+
 # C extensions
 *.so
 
