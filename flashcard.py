@@ -4,6 +4,7 @@ BACKGROUND_COLOR = "#B1DDC6"
 FRONT_OF_CARD_LANGUAGE = "French"
 BACK_OF_CARD_LANGUAGE = "English"
 
+
 class Flashcard:
     def __init__(self):
         # Creating word

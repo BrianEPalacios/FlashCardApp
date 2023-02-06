@@ -10,13 +10,14 @@ french_words_csv_file_path = "data/french_words.csv"
 words_to_learn_csv_file_path = "data/words_to_learn.csv"
 
 try:
+    # check and see if there is the words to learn csv
     word_df = pd.read_csv(words_to_learn_csv_file_path)
 except FileNotFoundError:
-    print("Using French Words")
+    # if there is not, use the french words csv
     word_df = pd.read_csv(french_words_csv_file_path)
     word_dict = word_df.to_dict(orient="records")
 else:
-    print("Using Words to learn")
+    # if there is, use words to learn csv
     word_dict = word_df.to_dict(orient="records")
     print(word_dict)
 
@@ -55,9 +56,7 @@ def checkmark_button_click():
     flashcard.front_of_card(french_word=french_word, english_word=english_word)
     flip_timer = window.after(3000, func=button_flip_card)
     # creating value to remove from dictionary
-    print(word_dict)
     d = {"French": french_word, "English": english_word}
-    print(d in word_dict)
     if counter > 1:
         word_dict.remove(d)
     # rewrite the csv so that it has the words you haven't learned
@@ -72,6 +71,7 @@ window.title("Flashcard")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 
 flashcard = Flashcard()
+############# Flip timer is flipping the cards, wait 3 seconds, then call function, and flip card
 flip_timer = window.after(3000, func=button_flip_card)
 
 # create buttons
